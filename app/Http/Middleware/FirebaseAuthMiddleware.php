@@ -5,7 +5,9 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Kreait\Firebase\Auth as FirebaseAuth;
+use Kreait\Laravel\Firebase\Facades\Firebase;
 use Symfony\Component\HttpFoundation\Response;
+use App\Models\User;
 
 class FirebaseAuthMiddleware
 {
@@ -14,12 +16,12 @@ class FirebaseAuthMiddleware
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    protected FirebaseAuth $auth;
+    // protected FirebaseAuth $auth;
 
-    public function __construct(FirebaseAuth $auth)
-    {
-        $this->auth = $auth;
-    }
+    // public function __construct(FirebaseAuth $auth)
+    // {
+    //     $this->auth = $auth;
+    // }
 
     public function handle(Request $request, Closure $next): Response
     {
@@ -30,12 +32,21 @@ class FirebaseAuthMiddleware
         }
 
         try {
-            $verifiedIdToken = $this->auth->verifyIdToken($idToken);
+            $auth = Firebase::auth();
+            $verifiedIdToken = $auth->verifyIdToken($idToken);
             $uid = $verifiedIdToken->claims()->get('sub');
 
-            $request->merge(['firebase_uid' => $uid]);
+            $user = User::firstOrCreate(
+                ['firebase_uid' => $uid],
+                [
+                    'name' => $verifiedIdToken->claims()->get('name') ?? 'ユーザー',
+                    'email' => $verifiedIdToken->claims()->get('email'),
+                ]
+            );
+
+            $request->setUserResolver(fn() => $user);
         } catch (\Exception $e) {
-            return response()->json(['message' => 'Invalid Token'], 401);
+            return response()->json(['message' => 'Unauthorized'], 401);
         }
 
         return $next($request);
