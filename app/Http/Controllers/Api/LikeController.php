@@ -19,7 +19,10 @@ class LikeController extends Controller
 
         if ($like) {
             $like->delete();
-            return response()->json(['liked' => false]);
+            return response()->json([
+                'liked' => false,
+                'likes' => $post->likes()->count(),
+            ]);
         }
 
         Like::create([
@@ -27,6 +30,9 @@ class LikeController extends Controller
             'post_id' => $post->id,
         ]);
 
-        return response()->json(['liked' => true]);
+        return response()->json([
+            'liked' => true,
+            'likes' => $post->likes()->count(),
+        ]);
     }
 }
