@@ -35,6 +35,14 @@ class PostController extends Controller
         );
     }
 
+    public function show(Post $post)
+    {
+        return response()->json(
+            $post->load('user')
+                ->loadCount('likes'),
+            200
+        );
+    }
     public function destroy(Request $request, Post $post)
     {
         $user = $request->user();
