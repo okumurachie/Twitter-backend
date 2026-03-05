@@ -27,7 +27,8 @@
 /storage/pail
 /storage/firebase/
 
-/bootstrap/cache
+/bootstrap/cache/*
+!/bootstrap/cache/.gitignore
 
 Homestead.json
 Homestead.yaml

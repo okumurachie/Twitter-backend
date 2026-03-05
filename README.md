@@ -77,7 +77,8 @@ php artisan key:generate
 本アプリでは Firebase Authentication を使用しています。
 
 1. Firebaseプロジェクトを作成 <br>
-   Firebaseコンソールでプロジェクトを作成してください。
+   Firebaseコンソールでプロジェクトを作成してください。<br>
+   Firebase Authentication（Email/Password）を有効化してください。
 
 2. サービスアカウントキー(JSON)を取得 <br>
    Firebaseコンソール → プロジェクト設定 → サービスアカウント <br>
