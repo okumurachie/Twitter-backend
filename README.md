@@ -66,8 +66,11 @@ storage/firebase/firebase.json
 
 3. .env に以下を設定してください。
 
+```env
 FIREBASE_CREDENTIALS=storage/firebase/firebase.json
 FIREBASE_PROJECT_ID=your-project-id
+```
+
 ※UID関連の設定は不要です。(Seederユーザーはダミーのため)
 
 ### DB初期化とシーディング
