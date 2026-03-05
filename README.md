@@ -47,28 +47,28 @@ cp .env.example .env
 ## 3.依存パッケージインストール
 
 ```bash
-- composer install
+composer install
 ```
 
 ```bash
-- php artisan key:generate
+php artisan key:generate
 ```
 
 ### Firebase設定
 
-    本アプリでは Firebase Authentication を使用しています。
+本アプリでは Firebase Authentication を使用しています。
 
-    1.動作させるには、Firebaseプロジェクトを作成し、
-    サービスアカウントキー(JSON)を取得してください。
+1.動作させるには、Firebaseプロジェクトを作成し、
+サービスアカウントキー(JSON)を取得してください。
 
-    2.取得したJSONファイルを以下の場所に配置してください。
-    storage/firebase/firebase.json
+2.取得したJSONファイルを以下の場所に配置してください。
+storage/firebase/firebase.json
 
-    3. .env に以下を設定してください。
+3. .env に以下を設定してください。
 
-    FIREBASE_CREDENTIALS=storage/firebase/firebase.json
-    FIREBASE_PROJECT_ID=your-project-id
-    ※UID関連の設定は不要です。(Seederユーザーはダミーのため)
+FIREBASE_CREDENTIALS=storage/firebase/firebase.json
+FIREBASE_PROJECT_ID=your-project-id
+※UID関連の設定は不要です。(Seederユーザーはダミーのため)
 
 ### DB初期化とシーディング
 
