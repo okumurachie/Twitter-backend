@@ -27,10 +27,7 @@ class UsersTableSeeder extends Seeder
         foreach ($users as $user) {
             User::updateOrCreate(
                 ['email' => $user['email']],
-                [
-                    'firebase_uid' => Str::uuid(), // ダミーUID
-                    'name' => $user['name'],
-                ]
+                ['name' => $user['name']],
             );
         }
     }

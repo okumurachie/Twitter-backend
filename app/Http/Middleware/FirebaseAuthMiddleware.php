@@ -36,14 +36,23 @@ class FirebaseAuthMiddleware
             $verifiedIdToken = $auth->verifyIdToken($idToken);
 
             $uid = $verifiedIdToken->claims()->get('sub');
+            $name = $verifiedIdToken->claims()->get('name');
+            $email = $verifiedIdToken->claims()->get('email');
 
-            $user = User::firstOrCreate(
-                ['firebase_uid' => $uid],
-                [
-                    'name' => $verifiedIdToken->claims()->get('name') ?? 'ユーザー',
-                    'email' => $verifiedIdToken->claims()->get('email'),
-                ]
-            );
+            $user = User::where('email', $email)->first();
+
+            if ($user) {
+                if (!$user->firebase_uid) {
+                    $user->firebase_uid = $uid;
+                    $user->save();
+                }
+            } else {
+                $user = User::create([
+                    'firebase_uid' => $uid,
+                    'name' => $name ?? $email,
+                    'email' => $email,
+                ]);
+            }
 
             $request->setUserResolver(fn() => $user);
         } catch (\Exception $e) {
