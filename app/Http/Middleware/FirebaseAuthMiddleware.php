@@ -4,7 +4,6 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Kreait\Firebase\Auth as FirebaseAuth;
 use Kreait\Laravel\Firebase\Facades\Firebase;
 use Symfony\Component\HttpFoundation\Response;
 use App\Models\User;
@@ -16,12 +15,6 @@ class FirebaseAuthMiddleware
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    // protected FirebaseAuth $auth;
-
-    // public function __construct(FirebaseAuth $auth)
-    // {
-    //     $this->auth = $auth;
-    // }
 
     public function handle(Request $request, Closure $next): Response
     {
