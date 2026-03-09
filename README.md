@@ -22,7 +22,7 @@ Twitter風の簡易SNSアプリのバックエンドAPIです。
 
 # 環境構築手順（ローカル開発用）
 
-## ■ 動作環境
+### 動作環境
 
 - PHP 8.2 以上（Laravel 12 要件）
 - Composer
@@ -147,18 +147,27 @@ http://127.0.0.1:8000
 
 ## システム構成
 
-Frontend（Nuxt 4）<br>
+Nuxt（Frontend）<br>
 ↓ REST API<br>
-Backend（Laravel）<br>
+Laravel（Backend）<br>
 ↓<br>
 MySQL
 
 ## 使用技術
 
-- PHP 8.2以上
+### Backend
+
+- PHP 8.2
 - Laravel 12
 - MySQL
-- Firebase Authentication（IDトークン認証）
+
+### Authentication
+
+- Firebase Authentication
+
+### Frontend
+
+- Nuxt 4
 
 ## 主な機能
 
@@ -167,7 +176,7 @@ MySQL
 - 投稿作成・削除(認証ユーザーのみ)
 - いいね機能(重複防止)
 - コメント機能
-- 投稿追加・削除・コメント追加・いいね機能は認証ユーザーのみ操作可能
+- 投稿作成・削除・コメント追加・いいね機能は認証ユーザーのみ操作可能
 - 自身の投稿のみ削除可能
 - Seederユーザーは表示用で操作不可
 
@@ -195,5 +204,3 @@ http://127.0.0.1:8000
 ```
 
 ※ フロントエンドは http://localhost:3000 で起動してください。
-
-# Twitter-backend
